@@ -16,7 +16,7 @@ sudo apt install nginx -y
 sudo ufw allow 'Nginx Full'
 
 # Remove the default configuration file
-sudo rm /etc/nginx/sites-available/default
+# sudo rm /etc/nginx/sites-available/default
 
 # Configure Nginx for your domain
 sudo bash -c "cat <<'EOF' > /etc/nginx/sites-available/$DOMAIN
