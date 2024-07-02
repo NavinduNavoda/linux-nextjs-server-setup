@@ -12,10 +12,21 @@ DOMAIN=$1
 # Install Nginx
 sudo apt install nginx -y
 
+# Allow Nginx in firewall
+sudo ufw allow 'Nginx HTTPS'
+
+# Remove the default configuration file
+sudo rm /etc/nginx/sites-available/default
+
 # Configure Nginx for your domain
 sudo bash -c "cat > /etc/nginx/sites-available/$DOMAIN <<EOF
 server {
     listen 80;
+    listen [::]:80;
+
+    root /var/www/html;
+    index index.html index.htm index.nginx-debian.html;
+
     server_name $DOMAIN www.$DOMAIN;
 
     location / {
@@ -32,11 +43,15 @@ EOF"
 # Enable the Nginx configuration
 sudo ln -s /etc/nginx/sites-available/$DOMAIN /etc/nginx/sites-enabled/
 
+
+# Uncomment server_names_hash_bucket_size in nginx config
+sudo sed -i 's/# server_names_hash_bucket_size 64;/server_names_hash_bucket_size 64;/' /etc/nginx/nginx.conf
+
 # Test Nginx configuration
 sudo nginx -t
 
 # Reload Nginx to apply the configuration
-sudo systemctl reload nginx
+sudo systemctl restart nginx
 
 # Install Certbot for SSL
 sudo apt install certbot python3-certbot-nginx -y

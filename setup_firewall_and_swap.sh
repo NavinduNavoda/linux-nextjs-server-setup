@@ -17,6 +17,7 @@ sudo fallocate -l 1G /swapfile
 sudo chmod 600 /swapfile
 sudo mkswap /swapfile
 sudo swapon /swapfile
+sudo swapon --show
 
 # Make the swap file permanent
 echo '/swapfile none swap sw 0 0' | sudo tee -a /etc/fstab

@@ -22,5 +22,5 @@ npm run build
 pm2 start npm --name "nextjs-app" -- run start
 
 # Setup pm2 to start on boot
-pm2 startup
+pm2 startup systemd
 pm2 save
