@@ -6,6 +6,8 @@ chmod +x setup_firewall_and_swap.sh install_node_and_tools.sh keygen.sh install_
 ./keygen.sh
 
 ### clone git ####
+### copy .env.local to server
+### "build": "NODE_OPTIONS='--max-old-space-size=1024' next build",
 
 ./install_dependencies_and_setup_pm2.sh your_project_directory
 
