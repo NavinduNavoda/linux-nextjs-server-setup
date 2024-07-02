@@ -19,7 +19,7 @@ sudo ufw allow 'Nginx Full'
 sudo rm /etc/nginx/sites-available/default
 
 # Configure Nginx for your domain
-sudo bash -c "cat > /etc/nginx/sites-available/$DOMAIN <<EOF
+sudo bash -c "cat <<'EOF' > /etc/nginx/sites-available/$DOMAIN
 server {
     listen 80;
     listen [::]:80;
@@ -39,6 +39,7 @@ server {
     }
 }
 EOF"
+
 
 # Enable the Nginx configuration
 sudo ln -s /etc/nginx/sites-available/$DOMAIN /etc/nginx/sites-enabled/
