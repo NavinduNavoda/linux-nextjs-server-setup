@@ -16,7 +16,8 @@ sudo apt install nginx -y
 sudo ufw allow 'Nginx Full'
 
 # Remove the default configuration file
-# sudo rm /etc/nginx/sites-available/default
+sudo rm /etc/nginx/sites-available/default
+sudo rm /etc/nginx/sites-enabled/default
 
 # Configure Nginx for your domain
 sudo bash -c "cat <<'EOF' > /etc/nginx/sites-available/$DOMAIN
@@ -28,6 +29,9 @@ server {
     index index.html index.htm index.nginx-debian.html;
 
     server_name $DOMAIN www.$DOMAIN;
+
+    client_max_body_size 100M;
+    client_body_timeout 60s;
 
     location / {
         proxy_pass http://localhost:3000;
