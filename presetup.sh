@@ -33,7 +33,7 @@ sudo apt install -y nodejs
 sudo npm install -g pm2
 
 # Install TypeScript and Next.js globally
-sudo npm install -g typescript next
+sudo npm install -g typescript next tsx
 
 # Install Git
 sudo apt install -y git
