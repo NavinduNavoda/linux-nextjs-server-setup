@@ -1,19 +1,6 @@
-chmod +x setup_firewall_and_swap.sh install_node_and_tools.sh keygen.sh install_dependencies_and_setup_pm2.sh setup_nginx_and_ssl.sh
-
 
 chmod +x postsetup.sh presetup.sh appsetup.sh
 
+pm2 start npm --name "backend" -- run start
 
-./setup_firewall_and_swap.sh
-./install_node_and_tools.sh
-
-./keygen.sh
-
-### clone git ####
-### copy .env.local to server
-### "build": "NODE_OPTIONS='--max-old-space-size=1024' next build",
-
-./install_dependencies_and_setup_pm2.sh your_project_directory
-
-
-./setup_nginx_and_ssl.sh your_domain
+pm2 start npm --name "cms-preview" -- run preview

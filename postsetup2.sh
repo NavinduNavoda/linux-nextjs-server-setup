@@ -33,14 +33,10 @@ server {
     client_max_body_size 100M;
     client_body_timeout 60s;
 
-    # Route /admin to localhost:4173
+    # Route /admin to the build folder of Vite React app
     location /admin {
-        proxy_pass http://localhost:4173;
-        proxy_http_version 1.1;
-        proxy_set_header Upgrade \$http_upgrade;
-        proxy_set_header Connection 'upgrade';
-        proxy_set_header Host \$host;
-        proxy_cache_bypass \$http_upgrade;
+        root /root/ceylon_saga_backend/server/cms/dist;
+        try_files \$uri \$uri/ /index.html;
     }
 
     # Route /backend/api to localhost:4000
