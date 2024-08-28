@@ -33,19 +33,16 @@ server {
     client_max_body_size 100M;
     client_body_timeout 60s;
 
-    # Route /admin to the build folder of Vite React app
+    # Route /admin to localhost:4000 (Node.js Express API)
     location /admin {
-        root /root/ceylon_saga_backend/server/cms/dist;
-        try_files \$uri \$uri/ /index.html;
-    }
-
-    # Route /backend/api to localhost:4000
-    location /backend/api {
         proxy_pass http://localhost:4000;
         proxy_http_version 1.1;
         proxy_set_header Upgrade \$http_upgrade;
         proxy_set_header Connection 'upgrade';
         proxy_set_header Host \$host;
+        proxy_set_header X-Real-IP \$remote_addr;
+        proxy_set_header X-Forwarded-For \$proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto \$scheme;
         proxy_cache_bypass \$http_upgrade;
     }
 
@@ -56,6 +53,9 @@ server {
         proxy_set_header Upgrade \$http_upgrade;
         proxy_set_header Connection 'upgrade';
         proxy_set_header Host \$host;
+        proxy_set_header X-Real-IP \$remote_addr;
+        proxy_set_header X-Forwarded-For \$proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto \$scheme;
         proxy_cache_bypass \$http_upgrade;
     }
 }
