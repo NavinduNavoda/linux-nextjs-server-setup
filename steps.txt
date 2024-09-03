@@ -1,5 +1,5 @@
 
-chmod +x postsetup.sh presetup.sh appsetup.sh
+chmod +x postsetup.sh presetup.sh appsetup.sh postsetup2.sh pnpm_install.sh
 
 pm2 start npm --name "backend" -- run start
 
