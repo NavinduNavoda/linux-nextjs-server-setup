@@ -1,13 +1,14 @@
 #!/bin/bash
 
 # Check if the correct number of arguments are provided
-if [ "$#" -ne 1 ]; then
-    echo "Usage: $0 <DOMAIN>"
+if [ "$#" -ne 2 ]; then
+    echo "Usage: $0 <DOMAIN> <PORT>"
     exit 1
 fi
 
 # Variables from arguments
 DOMAIN=$1
+PORT=$2
 
 # Install Nginx
 sudo apt install nginx -y
@@ -34,7 +35,7 @@ server {
     client_body_timeout 60s;
 
     location / {
-        proxy_pass http://localhost:3000;
+        proxy_pass http://localhost:$PORT;
         proxy_http_version 1.1;
         proxy_set_header Upgrade \$http_upgrade;
         proxy_set_header Connection 'upgrade';
@@ -47,7 +48,6 @@ EOF"
 
 # Enable the Nginx configuration
 sudo ln -s /etc/nginx/sites-available/$DOMAIN /etc/nginx/sites-enabled/
-
 
 # Uncomment server_names_hash_bucket_size in nginx config
 sudo sed -i 's/# server_names_hash_bucket_size 64;/server_names_hash_bucket_size 64;/' /etc/nginx/nginx.conf
@@ -63,15 +63,11 @@ snap install certbot --classic
 sudo apt-get update -y
 sudo apt install certbot python3-certbot-nginx -y
 
-
-
 # Obtain and install SSL certificate
 sudo certbot --nginx -d $DOMAIN -d www.$DOMAIN
 
-#renew automatically
+# Renew automatically
 sudo certbot renew --dry-run
-
-
 
 # Reload Nginx to apply the SSL configuration
 sudo systemctl restart nginx
