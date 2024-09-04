@@ -32,6 +32,10 @@ sudo apt install -y nodejs
 # Install pm2 globally
 sudo npm install -g pm2
 
+#install pnpm
+sudo npm install -g pnpm
+
+
 # Install TypeScript and Next.js globally
 sudo npm install -g typescript next tsx
 

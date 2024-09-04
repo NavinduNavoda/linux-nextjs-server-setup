@@ -1,12 +1,5 @@
 #!/bin/bash
 
-# Update package list
-echo "Updating package list..."
-sudo apt update
-
-# Install Node.js and npm
-echo "Installing Node.js and npm..."
-sudo apt install -y nodejs npm
 
 # Install pnpm
 echo "Installing pnpm..."
