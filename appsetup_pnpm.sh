@@ -13,14 +13,14 @@ PROJECT_DIRECTORY=$1
 cd $PROJECT_DIRECTORY
 
 # Install project dependencies
-pnpm install
+sudo pnpm install
 
 # Build the Next.js application
-pnpm run build
+sudo pnpm run build
 
 # Start the Next.js application with pm2
-pm2 start pnpm --name "nextjs-app" -- run start
+sudo pm2 start pnpm --name "nextjs-app" -- run start
 
 # Setup pm2 to start on boot
-pm2 startup systemd
-pm2 save
+sudo pm2 startup systemd
+sudo pm2 save
