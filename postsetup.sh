@@ -34,6 +34,11 @@ server {
     client_max_body_size 100M;
     client_body_timeout 60s;
 
+    location /.well-known/acme-challenge/ {
+        root /var/www/html;
+        default_type 'text/plain';
+    }
+
     location / {
         proxy_pass http://localhost:$PORT;
         proxy_http_version 1.1;
